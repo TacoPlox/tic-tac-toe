@@ -65,10 +65,36 @@ namespace tic_tac_toe
             AddValue('X', y, x);
         }
 
+        static bool IsValueInMatrix(int y, int x) {
+            bool isEmpty = matrix[y, x] == ' ';
+
+            return !isEmpty;
+        }
+
+        static void AIRequest() {
+            Random r = new Random();
+
+            bool validPositionSelected = false;
+
+            int y = 0;
+            int x = 0;
+
+            while(!validPositionSelected) {
+                y = (int) Math.Floor(r.NextDouble() * 3);
+                x = Convert.ToInt32(Math.Floor(r.NextDouble() * 3));
+                bool isValueDefined = IsValueInMatrix(y, x);
+
+                validPositionSelected = !isValueDefined;
+            }
+
+            AddValue('O', y, x);
+        }
+
         static void Main(string[] args)
         {        
             PrintMatrix();
             InputRequest();
+            AIRequest();
             PrintMatrix();
 
 
