@@ -90,35 +90,117 @@ namespace tic_tac_toe
             AddValue('O', y, x);
         }
 
+        static bool CheckThreeLines() {
+            char value = ' ';
+            bool sameValue = true;
+            //Rows
+            for (int y = 0; y < 3; y++) {
+                value = ' ';
+                sameValue = true;
+                for (int x = 0; x < 3; x++) {
+                    if (x == 0) {
+                        value = matrix[y, x];
+                    } else {
+                        sameValue = sameValue && (value == matrix[y, x]);
+                    }
+                }
+                //sameValue determina si todos los elementos de la row
+                // son iguales o no
+
+                if (sameValue && value != ' ') {
+                    return true;
+                }
+            }
+
+            //Columns
+            for (int x = 0; x < 3; x++) {
+                value = ' ';
+                sameValue = true;
+                for (int y = 0; y < 3; y++) {
+                    if (y == 0) {
+                        value = matrix[y, x];
+                    } else {
+                        sameValue = sameValue && (value == matrix[y, x]);
+                    }
+                }
+                //sameValue determina si todos los elementos de la row
+                // son iguales o no
+
+                if (sameValue && value != ' ') {
+                    return true;
+                }
+            }
+            //Diagonals
+            //[0,0] [1,1] [2,2]
+            value = ' ';
+            sameValue = true;
+            for (int i = 0; i < 3; i++) {
+                if (i == 0) {
+                    value = matrix[i, i];
+                } else {
+                    sameValue = sameValue && (value == matrix[i, i]);
+                }
+
+                if (i == 2 && sameValue && value != ' ') {
+                    return true;
+                }
+            }
+
+            //[0,2] [1,1] [2,0]
+
+            value = ' ';
+            sameValue = true;
+            for (int y = 0; y < 3; y++) {
+                int x = 2 - y;
+                if (y == 0) {//manejo especial en primer iteración
+                    value = matrix[y, x];
+                } else {
+                    sameValue = sameValue && (value == matrix[y, x]);
+                }
+
+                if (y == 2 && sameValue && value != ' ') {
+                    return true;
+                }
+            }
+
+
+
+            return false;
+        }
+
         static void Main(string[] args)
         {        
+            // PrintMatrix();
+            // InputRequest();
+            // AIRequest();
+            // PrintMatrix();
+
+
+            bool gameEnded = false;
+            int turns = 0;
+
+            while (!gameEnded) {
+                InputRequest();
+                turns++;
+                //Check if user won
+                gameEnded = CheckThreeLines();
+
+                //End after 9 turns
+                if (turns >= 9) {
+                    gameEnded = true;
+                }
+
+                if (!gameEnded) {
+                    AIRequest();
+                    turns++;
+                    //Check if AI won
+                    gameEnded = CheckThreeLines();
+                }
+                PrintMatrix();
+            }
+
+            Console.WriteLine("Game over.");
             PrintMatrix();
-            InputRequest();
-            AIRequest();
-            PrintMatrix();
-
-
-            // bool gameEnded = false;
-            // int turns = 0;
-
-            // while (!gameEnded) {
-            //     InputRequest();
-            //     turns++;
-            //     //Check if user won
-            //     gameEnded = CheckThreeLines();
-
-            //     //End after 9 turns
-            //     if (turns >= 9) {
-            //         gameEnded = true;
-            //     }
-
-            //     if (!gameEnded) {
-            //         //AIRequest();
-            //         turns++;
-            //         //Check if AI won
-            //         gameEnded = CheckThreeLines();
-            //     }
-            // }
         }
     }
 }
