@@ -34,7 +34,11 @@ namespace tic_tac_toe
                 }
                 line = line.Substring(0, line.Length - 1);
                 Console.WriteLine(line);
-                Console.WriteLine("------");
+                if (y == 0){
+                    Console.WriteLine("-----");
+                } else if(y == 1) {
+                    Console.WriteLine("-----");
+                }
             }
         }
 
