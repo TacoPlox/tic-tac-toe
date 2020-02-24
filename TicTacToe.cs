@@ -48,19 +48,35 @@ namespace tic_tac_toe
             matrix[y, x] = value;
         }
 
-        static void InputRequest() {
-            Console.WriteLine("Escribe las coordenadas de la forma y,x en donde quieres hacer tu movimiento y presiona enter.");
-            string userInputCoordinates = Console.ReadLine();
+        static void InputRequest()
+        {
+             bool validPositionSelected = false;
 
-            //Quitar espacios
-            userInputCoordinates = userInputCoordinates.Replace(" ", "");
+            int y = 0;
+            int x = 0;
 
-            //Separar en un arreglo de valores con ","
-            string[] coordinates = userInputCoordinates.Split(",");
+            while(!validPositionSelected){
+                Console.WriteLine("Escribe las cordenadas de la fomra y,x donde quieres hacer tu movimiento y presiona enter");
+                string userInoutCoordinates = Console.ReadLine();
 
-            //Convertir en coordenadas tipo entero
-            int y = Convert.ToInt32(coordinates[0]);
-            int x = Convert.ToInt32(coordinates[1]);
+                //quitar espacio
+                userInoutCoordinates = userInoutCoordinates.Replace(" ", " ");
+
+                //separar en un arreglo de valores con ","
+                string[] coordinates = userInoutCoordinates.Split(",");
+
+
+                //convertir en cordenadas tipo entero
+                y = Convert.ToInt32(coordinates[0]);
+                x = Convert.ToInt32(coordinates[1]);
+                bool isValueDefined = IsValueInMatrix(y, x);
+
+                validPositionSelected = !isValueDefined;
+
+                if(!validPositionSelected){
+                    Console.WriteLine("esa pocision ya esta ocupada");
+                }
+            }
 
             AddValue('X', y, x);
         }
