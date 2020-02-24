@@ -49,7 +49,7 @@ namespace tic_tac_toe
         }
 
         static void InputRequest() {
-            Console.WriteLine("Escribe las coordenadas de la forma y,x en donde quieres hacer tu movimiento y presiona enter.");
+            Console.WriteLine("Teclea las coordenadas que deseas ingresar.");
             string userInputCoordinates = Console.ReadLine();
 
             //Quitar espacios
@@ -199,7 +199,7 @@ namespace tic_tac_toe
                 PrintMatrix();
             }
 
-            Console.WriteLine("Game over.");
+            Console.WriteLine("This game is over in this moment.");
             PrintMatrix();
         }
     }
