@@ -90,7 +90,7 @@ namespace tic_tac_toe
             AddValue('O', y, x);
         }
 
-        static bool CheckThreeLines() {
+        static bool CheckWin() {
             char value = ' ';
             bool sameValue = true;
             //Rows
@@ -183,7 +183,7 @@ namespace tic_tac_toe
                 InputRequest();
                 turns++;
                 //Check if user won
-                gameEnded = CheckThreeLines();
+                gameEnded = CheckWin();
 
                 //End after 9 turns
                 if (turns >= 9) {
@@ -194,7 +194,7 @@ namespace tic_tac_toe
                     AIRequest();
                     turns++;
                     //Check if AI won
-                    gameEnded = CheckThreeLines();
+                    gameEnded = CheckWin();
                 }
                 PrintMatrix();
             }
